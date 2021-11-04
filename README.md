@@ -1,4 +1,4 @@
-# React Native Workshop with Expo and Bitrise
+# React Native with Expo and Bitrise
 
 This repository is a sample application created for the workshop about using React Native in an Expo flow using Bitrise for the CI/CD tool.
 
