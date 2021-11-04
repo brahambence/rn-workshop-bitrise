@@ -9,6 +9,8 @@ export default function App() {
   const [lives, setLives] = useState(maxLives);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 
+  const [isLifeLineUsed, setIsLifeLineUsed] = useState(false);
+
   const handleAnswerSelected = useCallback(
     (answer) => {
       const currentQuestion = questions[currentQuestionIndex];
@@ -24,6 +26,7 @@ export default function App() {
   const handleResetGame = () => {
     setLives(maxLives);
     setCurrentQuestionIndex(0);
+    setIsLifeLineUsed(false);
     reload();
   };
 
@@ -37,6 +40,7 @@ export default function App() {
           onResetGame={handleResetGame}
           isLoading={isLoading}
           lives={lives}
+          isLifeLineUsed={isLifeLineUsed}
         />
       )}
 

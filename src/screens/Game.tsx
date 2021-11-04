@@ -13,6 +13,8 @@ export interface IProps {
   onResetGame: () => void;
   isLoading: boolean;
   lives: number;
+  isLifeLineUsed: boolean;
+  setIsLifeLineUsed: (value : boolean) => void;
 }
 
 const Game = ({
@@ -22,6 +24,8 @@ const Game = ({
   onResetGame,
   isLoading,
   lives,
+  isLifeLineUsed,
+  setIsLifeLineUsed,
 }: IProps) => {
   const currentQuestion =
     questions.length > 0 ? questions[currentIndex] : undefined;
@@ -37,6 +41,17 @@ const Game = ({
       ]);
     }
   }, [currentQuestion]);
+
+  const handleHelpButtonPressed = useCallback(() => {
+    if (currentQuestion) {
+      const incorrectAnswers = shuffle(currentQuestion.incorrect_answers).slice(
+        0,
+        2
+      );
+      setAnswers(prev => prev.filter(ans => !incorrectAnswers.includes(ans)));
+      setIsLifeLineUsed(true);
+    }
+  },[currentQuestion])
 
   return (
     <>
@@ -67,7 +82,17 @@ const Game = ({
             />
           ))}
 
-        <Button fullWidth={false} inverted text="50 / 50" testID="thanos" />
+      {
+        !isLifeLineUsed &&
+        (
+          <Button onPress={handleHelpButtonPressed}
+            fullWidth={false} 
+            inverted 
+            text="50 / 50"
+            testID="thanos"
+          />
+        )
+      }
       </View>
 
       {isLoading || !currentQuestion ? (

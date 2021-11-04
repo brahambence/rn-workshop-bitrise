@@ -61,5 +61,6 @@ describe("App", () => {
         const currentStep = await getByTestId('currentStep');
 
         expect(currentStep.props.children).toEqual(`2 / ${maxQuestions}`);
-    })
+    });
+
 })
